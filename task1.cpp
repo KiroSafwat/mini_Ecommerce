@@ -87,14 +87,17 @@ public:
     // TODO: Complete calculateTotal
     void calculateTotal(vector<Product>& products) {
         // Your code here
-        for (int i = 0; i < products.size(); i++)
+        total=0;
+        for (int i = 0; i < items.size(); i++)
         {
-            if (id==products[i].id)
+            for (int j = 0; j < products.size(); j++)
             {
-                total=items[i].quantity*products[i].price;
-                break;
+                if (products[j].id==items[i].productId)
+                {
+                    total+=products[j].price*items[i].quantity;
+                    break;
+                }   
             }
-            
         }
         
     }
@@ -102,10 +105,22 @@ public:
     // TODO: Complete display
     void display(vector<Product>& products) {
         // Your code here
+        cout<<"Order ID: "<<id<<" | Customer: "<<customerId<<" | Total: $"<<total<<"\n";
         for (int i = 0; i < items.size(); i++)
         {
-            cout<<"Order ID: "<<id<<" | Customer: "<<customerId<<" | total: "<<total<<" | stock: ";
+            for (int j = 0; j < products.size(); j++)
+            {
+                if (items[i].productId==products[j].id)
+                {
+                    cout<<"- "<<products[j].name<<" (x"<<items[i].quantity<<") @ $"<<products[j].price<<"\n";
+                    break;
+                }
+                
+            }
+            cout<< 
         }
+        
+
         
     }
 };
