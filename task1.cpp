@@ -117,7 +117,7 @@ public:
                 }
                 
             }
-            cout<< 
+            
         }
         
 
@@ -138,41 +138,67 @@ public:
     void addProduct(string name, double price, int stock) {
         // Your code here
         products.push_back(Product(nextProductId++,name,price,stock));
+        cout<<"Added Product: "<<name;
+
     }
 
     // TODO: Complete addCustomer
     void addCustomer(string name, string email) {
         // Your code here
         customers.push_back(Customer(nextCustomerId++,name,email));
+        cout<<"Added Customer: "<<name;
     }
 
     // TODO: Complete createOrder
     void createOrder(int customerId) {
         // Your code here
-        orders.push_back(Order(nextOrderId++,customerId));
-
+        Order o (nextOrderId++,customerId);
+        orders.push_back(o);
+        for (int i = 0; i < orders.size(); i++)
+        {
+            if (customers[i].id==customerId)
+            {
+                customers[i].orderIds.push_back(o.id);
+            }
+            
+        }
+        cout<<"Created Order #"<<o.id;
     }
 
     // TODO: Complete addToOrder
     void addToOrder(int orderId, int productId, int quantity) {
         // Your code here
-        for (int i = 0; i < orders.size(); i++)
-        {
-            if (orders[i].id==orderId && orders[i].items[i].quantity<=products[i].stock)
+        for (int i = 0; i < orders.size(); i++){
+            if (orders[i].id==orderId)
             {
-                
-            }
-            
+                orders[i].items.push_back(OrderItem(productId,quantity));
+                cout<<"Created Order #"<<productId<< " to order #"<<orderId;
+                return;
+            }        
         }
         
     }
 
     void displayAll() {
         cout << "\n=== PRODUCTS ===" << endl;
+        for (int i = 0; i < products.size(); i++)
+        {
+            products[i].display();
+        }
+        
 
         cout << "\n=== CUSTOMERS ===" << endl;
+        for (int i = 0; i < customers.size(); i++)
+        {
+            customers[i].display();
+        }
         
         cout << "\n=== ORDERS ===" << endl;
+        for (int i = 0; i < orders.size(); i++)
+        {
+            orders[i].calculateTotal(products);
+            orders[i].display(products);
+        }
 
     }
 };
