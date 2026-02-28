@@ -59,6 +59,14 @@ public:
     // TODO: Complete display method
     void display() {
         // Your code here
+        cout<<"Customer ID: "<<id<<" | Nama: "<<name<<"\n ";
+        cout<<"Order History: ";
+        for (int i = 0; i < orderIds.size(); i++)
+        {
+            cout<<orderIds[i];
+        }
+        
+
     }
 };
 
@@ -137,7 +145,7 @@ public:
         {
             if (orders[i].id==orderId && orders[i].items[i].quantity<=products[i].stock)
             {
-                orders[i].items[i].
+                
             }
             
         }
